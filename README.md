@@ -357,8 +357,6 @@ O projeto calcula:
 | Precision | Acertos positivos |
 | Recall | Capacidade de encontrar classe |
 | F1-score | Média harmônica |
-| AUC | Área da curva ROC |
-
 
 Exemplo:
 
