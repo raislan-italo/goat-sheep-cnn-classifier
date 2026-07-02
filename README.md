@@ -32,7 +32,7 @@ O objetivo é estudar e aplicar técnicas de Deep Learning para classificação 
 
 <p align="center">
 
-<img src="assets/demo.gif" width="600">
+<img src="results/amostra_teste.png" width="600">
 
 </p>
 

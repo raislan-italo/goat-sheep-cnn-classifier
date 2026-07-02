@@ -4,10 +4,10 @@ import torch
 from PIL import Image
 from torchvision import transforms
 
-from src.train_model import CNN, IMG_SIZE, DEVICE
+from train_model import CNN, IMG_SIZE, DEVICE
 
 # Configuração
-MODEL_PATH = "pesos_modelo.pth"
+MODEL_PATH = "models/cnn_goat_sheep.pth"
 CLASS_NAMES = ["Goat", "Sheep"] 
 
 EXTENSOES_VALIDAS = (".jpg", ".jpeg", ".png", ".bmp")
@@ -59,7 +59,7 @@ def main():
     if os.path.isfile(caminho):
         classe, confianca, prob = prever_imagem(model, caminho, transform)
         print(f"{os.path.basename(caminho)}: {classe} (confiança: {confianca:.2%}, "
-              f"prob. bruta de '{CLASS_NAMES[1]}': {prob:.4f})")
+              f"probabilidade de '{CLASS_NAMES[1]}': {prob:.4f})")
 
     # Caminho é uma pasta com várias imagens
     elif os.path.isdir(caminho):
