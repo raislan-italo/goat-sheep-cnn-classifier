@@ -80,26 +80,21 @@ goat-sheep-cnn-classifier/
 │   └── sheep/
 │       ├── img001.jpg
 │       └── ...
-│
-├── src/
-
-│   ├── train_model.py
-│   ├── test_model.py
-│
-
+|
+├── models/
+|
+│   └── cnn_goat_sheep.pth
+|
 ├── results/
-
+|
 │   ├── confusion_matrix.png
 │   ├── training_history.png
-
-
-├── models/
-
-│   └── cnn_goat_sheep.pth
-
-
+|
+│   train_model.py
+│   test_model.py
+│
 ├── requirements.txt
-
+|
 └── README.md
 
 ```

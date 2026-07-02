@@ -6,6 +6,7 @@ import torch.optim as optim
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from collections import Counter
 import seaborn as sns
 from tqdm import tqdm
 from torch.utils.data import DataLoader, random_split
@@ -16,7 +17,6 @@ from sklearn.metrics import (
     recall_score,
     f1_score,
     confusion_matrix,
-    roc_auc_score,
     classification_report,
 )
 
@@ -80,6 +80,13 @@ def load_dataset(path):
 
     size_dataset = len(base_dataset)
 
+    contagem = Counter(base_dataset.targets)
+    print("Distribuição de classes no dataset completo:")
+
+    for idx, nome in enumerate(class_names):
+        print(f" {nome}: {contagem[idx]} imagens")
+    print(f" Total: {size_dataset} imagens\n")
+
     # Tamanho das divisões: treino(70%), validação(15%), teste(15%)
     train_size = int(0.7 * size_dataset)
     val_size = int(0.15 * size_dataset)
@@ -101,7 +108,6 @@ def load_dataset(path):
     print(f"Treino: {len(train_ds)} | Validação: {len(val_ds)} | Teste: {len(test_ds)}")
 
     return train_loader, val_loader, test_loader, class_names
-
 
 def show_images(loader, class_names):
     images, labels = next(iter(loader))
@@ -258,8 +264,7 @@ def test_model(model, loader):
         "Accuracy": accuracy_score(y_true, y_pred),
         "Precision": precision_score(y_true, y_pred),
         "Recall": recall_score(y_true, y_pred),
-        "F1": f1_score(y_true, y_pred),
-        "AUC": roc_auc_score(y_true, y_score),
+        "F1": f1_score(y_true, y_pred)
     }
 
     return metrics, y_true, y_pred, y_score
@@ -327,7 +332,7 @@ def plot_confusion(y_true, y_pred, class_names):
 if __name__ == "__main__":
 
     train_loader, val_loader, test_loader, class_names = load_dataset("dataset/")
-    show_images(train_loader, class_names)
+    # show_images(val_loader, class_names)
 
     model = CNN(num_classes=1).to(DEVICE)
 
@@ -352,5 +357,4 @@ if __name__ == "__main__":
 
     plot_confusion(y_true, y_pred, class_names)
 
-    print("Modelo salvo em models/cnn_goat_sheep.pth"
-    )
+    print("Modelo salvo em models/cnn_goat_sheep.pth")
